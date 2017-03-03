@@ -15,35 +15,49 @@ class List extends React.Component {
     total: 1
   }
   componentDidMount() {
-    this.getList();
+    // this.getList();
   }
-  getList(pageNo = this.state.pageNo , pageSize = this.state.pageSize){
-    Fetch.get('/getList', { apiName: 'getList', pageNo: pageNo, pageSize: pageSize }).then(result => {
-      let dataList = result.items_onsale_get_response.items.item.map((item) => {
-        return {
-          product: {
-            pic_url: item.pic_url,
-            title: item.title,
-            price: item.price,
-            num: item.num,
-            outer_id: item.outer_id
-          },
-          delist_time: item.delist_time
-        }
-      })
-      let total = result.items_onsale_get_response.total_results;
-      this.setState({
-        dataList,
-        total
-      });
-    })
+  getList(pageNo = this.state.pageNo, pageSize = this.state.pageSize) {
+    // Fetch.get('/getList', { apiName: 'getList', pageNo: pageNo, pageSize: pageSize }).then(result => {
+    //   let dataList = result.items_onsale_get_response.items.item.map((item) => {
+    //     return {
+    //       product: {
+    //         pic_url: item.pic_url,
+    //         title: item.title,
+    //         price: item.price,
+    //         num: item.num,
+    //         outer_id: item.outer_id
+    //       },
+    //       delist_time: item.delist_time
+    //     }
+    //   })
+    //   let total = result.items_onsale_get_response.total_results;
+    //   this.setState({
+    //     dataList,
+    //     total
+    //   });
+    // })
+    let dataList = this.props.list.map((item) => {
+      return {
+        product: {
+          pic_url: item.pic_url,
+          title: item.title,
+          price: item.price,
+          num: item.num,
+          outer_id: item.outer_id
+        },
+        delist_time: item.delist_time
+      }
+    });
+    return dataList;
   }
   onChange() {
   }
-  onPageChange(value){
+  onPageChange(value) {
     this.getList(value);
   }
   render() {
+    const dataList = this.getList();
     const renderBaby = (product) => {
       return (<div className="media">
         <img src={product.pic_url} className="media-side" width="80" height="80" />
@@ -56,11 +70,12 @@ class List extends React.Component {
     }
     return (
       <div>
-        <Table dataSource={this.state.dataList} rowSelection={{ onChange: () => { this.onChange() } }}>
+        <Table dataSource={dataList} rowSelection={{ onChange: () => { this.onChange() } }}>
           <Table.Column title="宝贝" dataIndex="product" cell={renderBaby} />
           <Table.Column title="下架时间" dataIndex="delist_time" />
         </Table>
-        <Pagination onChange={this.onPageChange.bind(this)} total={this.state.total}/>
+        <button onClick={()=>{this.props.init()}}>更新列表</button>
+        {/*<Pagination onChange={this.onPageChange.bind(this)} total={this.state.total} />*/}
       </div>
     );
   }
