@@ -1,7 +1,7 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {actions} from '../actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { actions } from '../actions';
 
 let yeomanImage = require('../images/yeoman.png');
 import List from './List/index';
@@ -13,10 +13,11 @@ import List from './List/index';
 //     );
 //   }
 // }
-const AppComponent = ({list, actions}) => {
-  return(
-  <List init={actions.init} list={list}/>
-)}
+const AppComponent = ({ list, actions }) => {
+  return (
+    <List init={actions.init} list={list} />
+  )
+}
 
 const mapStateToProps = state => ({
   list: state
@@ -26,8 +27,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-  actions: bindActionCreators(actions, dispatch)
-}}
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
 
 
 AppComponent.defaultProps = {

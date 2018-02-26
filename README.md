@@ -6,4 +6,5 @@
 - 实现了
     - step1： 一个简单的table+分页器，数据来源mock文件夹 √
     - step2:  加入redux √
-    - step3:  加入react-redux
+    - step3:  加入react-redux √
+    - step4: redux-saga √

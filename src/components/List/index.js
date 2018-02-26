@@ -15,7 +15,6 @@ class List extends React.Component {
     total: 1
   }
   componentDidMount() {
-    // this.getList();
   }
   getList(pageNo = this.state.pageNo, pageSize = this.state.pageSize) {
     // Fetch.get('/getList', { apiName: 'getList', pageNo: pageNo, pageSize: pageSize }).then(result => {
